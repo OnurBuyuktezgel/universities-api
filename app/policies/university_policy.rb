@@ -8,4 +8,12 @@ class UniversityPolicy < ApplicationPolicy
   def show?
     true
   end
+
+  def update?
+    record.user == user
+  end
+
+  def create?
+    !user.nil?
+  end
 end
