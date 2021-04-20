@@ -1,1 +1,1 @@
-json.extract! @restaurant, :id, :name, :url, :country, :address
+json.extract! @university, :id, :name, :url, :country, :address

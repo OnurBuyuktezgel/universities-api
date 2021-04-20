@@ -1,6 +1,6 @@
 class Api::V1::UniversitiesController < Api::V1::BaseController
   acts_as_token_authentication_handler_for User, except: [:index, :show]
-  before_action :set_university, only: [:show, :update]
+  before_action :set_university, only: [:show, :update, :destroy]
 
   def index
     @universities = policy_scope(University)
@@ -22,10 +22,15 @@ class Api::V1::UniversitiesController < Api::V1::BaseController
     @university.user = current_user
     authorize @university
     if @university.save
-      render :show
+      render :show, status: :created
     else
       render_error
     end
+  end
+
+  def destroy
+    @university.destroy
+    head :no_content
   end
 
   private

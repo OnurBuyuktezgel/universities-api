@@ -16,4 +16,8 @@ class UniversityPolicy < ApplicationPolicy
   def create?
     !user.nil?
   end
+
+  def destroy?
+    update?
+  end
 end
