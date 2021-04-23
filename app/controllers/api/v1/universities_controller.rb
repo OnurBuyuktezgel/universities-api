@@ -41,7 +41,7 @@ class Api::V1::UniversitiesController < Api::V1::BaseController
   end
 
   def university_params
-    params.require(:university).permit(:name, :url, :country, :address)
+    params.require(:university).permit(:name, :url, :country, :address, :latitude, :longitude)
   end
 
   def render_error

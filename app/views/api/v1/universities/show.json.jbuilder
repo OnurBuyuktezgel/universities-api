@@ -1,1 +1,1 @@
-json.extract! @university, :id, :name, :url, :country, :address
+json.extract! @university, :name, :url, :country, :latitude, :longitude, :address

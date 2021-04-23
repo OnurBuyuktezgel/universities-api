@@ -13,4 +13,21 @@ uni_url = 'https://raw.githubusercontent.com/Hipo/university-domains-list/master
 uni_serialized = open(uni_url).read
 uni = JSON.parse(uni_serialized)
 
-puts uni.size
+puts "Clearing the database..."
+
+  User.first.universities.destroy_all
+
+puts "Done."
+
+puts "Creating universities..."
+
+  uni.each do |u|
+    University.create(name: u["name"],
+                      address: u["name"],
+                      url: u["web_pages"].first,
+                      country: u["country"],
+                      user: User.first)
+  end
+
+puts "Done! #{University.count} universities have been added to the database!"
+

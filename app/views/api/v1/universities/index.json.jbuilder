@@ -1,3 +1,3 @@
 json.array! @universities do |university|
-  json.extract! university, :id, :name, :url, :country, :address
+  json.extract! university, :name, :url, :country, :address, :latitude, :longitude
 end
