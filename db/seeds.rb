@@ -9,17 +9,19 @@
 require 'json'
 require 'open-uri'
 
-uni_url = 'https://raw.githubusercontent.com/Hipo/university-domains-list/master/world_universities_and_domains.json'
-uni_serialized = open(uni_url).read
-uni = JSON.parse(uni_serialized)
-
-puts "Clearing the database..."
+puts "1- Clearing the database..."
 
   User.first.universities.destroy_all
 
 puts "Done."
+puts "2- Parsing university list..."
 
-puts "Creating universities..."
+uni_url = 'https://raw.githubusercontent.com/Hipo/university-domains-list/master/world_universities_and_domains.json'
+uni_serialized = open(uni_url).read
+uni = JSON.parse(uni_serialized)
+
+puts "Done."
+puts "3- Creating universities..."
 
   uni.each do |u|
     University.create(name: u["name"],
