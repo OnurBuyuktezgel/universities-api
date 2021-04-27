@@ -49,20 +49,21 @@ require 'open-uri'
 
 # puts "Parsing UMR api"
 
-  umr_url = 'https://www.umultirank.org/json/exploreUniFinder.json'
-  umr_serialized = open(umr_url).read
-  umr_uni = JSON.parse(umr_serialized)
+  # umr_url = 'https://www.umultirank.org/json/exploreUniFinder.json'
+  # umr_serialized = open(umr_url).read
+  # umr_uni = JSON.parse(umr_serialized)
 
 
-  umr_uni["unis"].each do |umr|
-    unless University.find_by(name: "#{umr["name"]}").nil?
-      University.find_by(name: "#{umr["name"]}").update!(
-        url: umr["url"],
-        facebook: umr["facebook"],
-        twitter: umr["twitter"],
-        phone: umr["tele"],
-        instagram: umr["instagram"],
-        linkedin: umr["linkedin"],
-        umultirank: "https://www.umultirank.org/study-at/#{umr["slug"]}")
-    end
-  end
+  # umr_uni["unis"].each do |umr|
+  #   unless University.find_by(name: "#{umr["name"]}").nil?
+  #     University.find_by(name: "#{umr["name"]}").update!(
+  #       url: umr["url"],
+  #       facebook: umr["facebook"],
+  #       twitter: umr["twitter"],
+  #       phone: umr["tele"],
+  #       instagram: umr["instagram"],
+  #       linkedin: umr["linkedin"],
+  #       umultirank: "https://www.umultirank.org/study-at/#{umr["slug"]}")
+  #   end
+  # end
+
