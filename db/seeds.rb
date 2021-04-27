@@ -36,23 +36,36 @@ require 'open-uri'
 
 # ----------------------------------------------------------
 
-puts "Now making it fancier, please wait a little bit more."
+# puts "Now making it fancier, please wait a little bit more."
 
-University.all.each do |uni|
-  if uni.name == uni.address
-    uni.address = nil
-    uni.save!
-  end
-end
+# University.all.each do |uni|
+#   if uni.name == uni.address
+#     uni.address = nil
+#     uni.save!
+#   end
+# end
 
 # ----------------------------------------------------------
 
-# puts "Parsing UMR api"
+puts "Parsing UMR api"
 
-  # umr_url = 'https://www.umultirank.org/json/exploreUniFinder.json'
-  # umr_serialized = open(umr_url).read
-  # umr_uni = JSON.parse(umr_serialized)
+  umr_url = 'https://www.umultirank.org/json/exploreUniFinder.json'
+  umr_serialized = open(umr_url).read
+  umr_uni = JSON.parse(umr_serialized)
 
+
+  umr_uni["unis"].each do |umr|
+    unless University.find_by(url: "#{umr["url"]}").nil?
+      University.find_by(url: "#{umr["url"]}").update!(
+        url: umr["url"],
+        facebook: umr["facebook"],
+        twitter: umr["twitter"],
+        phone: umr["tele"],
+        instagram: umr["instagram"],
+        linkedin: umr["linkedin"],
+        umultirank: "https://www.umultirank.org/study-at/#{umr["slug"]}")
+    end
+  end
 
   # umr_uni["unis"].each do |umr|
   #   unless University.find_by(name: "#{umr["name"]}").nil?
@@ -66,4 +79,3 @@ end
   #       umultirank: "https://www.umultirank.org/study-at/#{umr["slug"]}")
   #   end
   # end
-
