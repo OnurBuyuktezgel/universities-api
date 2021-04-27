@@ -3,7 +3,7 @@ class Api::V1::UniversitiesController < Api::V1::BaseController
   before_action :set_university, only: [:show, :update, :destroy]
 
   def index
-    @universities = policy_scope(University)
+    @universities = policy_scope(University).order(name: :asc)
   end
 
   def show

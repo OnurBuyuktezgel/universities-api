@@ -1,2 +1,44 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="container">
+  <div class='header mt-5'>
+    <h1>World Universities API</h1>
+    <h5>Currently <span class="font-weight-bold"><%= University.count %></span> universities available.</h5>
+  </div>
+  <div class="introduction mt-3">
+    <% unless user_signed_in? %>
+      <p>
+        <%= link_to 'Login', new_user_session_path %>
+        or
+        <%= link_to 'Sign Up', new_user_registration_path  %>
+        to have full access.
+      </p>
+      <p>Anyone can fetch and use all data.</p>
+      <p>Users can:</p>
+      <ul>
+        <li><p>add and update universities</p></li>
+        <li><p>remove universities which they've added</p></li>
+      </ul>
+    <% else %>
+      <p>Hello <%= current_user.email.split('@').first %>,
+        your API Key is:</p>
+      <p id='apikey'><%= current_user.authentication_token %></p>
+      <p>Users can add universities and remove those which they've added.</p>
+      <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+    <% end %>
+  </div>
+
+  <div class="info mt-3">
+    <h3>Information</h3>
+    <p>This API is a RESTful web service to obtain basic data of the universities worldwide.</p>
+    <ul>
+      <li><p>includes names, urls, addresses and coordinates of the universities</p></li>
+      <li><p>JSON response</p></li>
+    </ul>
+  </div>
+  <div class="usage mt-3">
+    <h3>Usage</h3>
+    <p>Send all data requests to:</p>
+    <p class='url'>/api/v1/universities</p>
+    <p>For details on a university, include university id at end of URL:</p>
+    <p class='url'>/api/v1/universities/:id</p>
+  </div>
+</div>
