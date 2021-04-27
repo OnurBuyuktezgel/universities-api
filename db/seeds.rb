@@ -54,22 +54,9 @@ puts "Parsing UMR api"
   umr_uni = JSON.parse(umr_serialized)
 
 
-  umr_uni["unis"].each do |umr|
-    unless University.find_by(url: "#{umr["url"]}").nil?
-      University.find_by(url: "#{umr["url"]}").update!(
-        url: umr["url"],
-        facebook: umr["facebook"],
-        twitter: umr["twitter"],
-        phone: umr["tele"],
-        instagram: umr["instagram"],
-        linkedin: umr["linkedin"],
-        umultirank: "https://www.umultirank.org/study-at/#{umr["slug"]}")
-    end
-  end
-
   # umr_uni["unis"].each do |umr|
-  #   unless University.find_by(name: "#{umr["name"]}").nil?
-  #     University.find_by(name: "#{umr["name"]}").update!(
+  #   unless University.find_by(url: "#{umr["url"]}").nil?
+  #     University.find_by(url: "#{umr["url"]}").update!(
   #       url: umr["url"],
   #       facebook: umr["facebook"],
   #       twitter: umr["twitter"],
@@ -79,3 +66,16 @@ puts "Parsing UMR api"
   #       umultirank: "https://www.umultirank.org/study-at/#{umr["slug"]}")
   #   end
   # end
+
+  umr_uni["unis"].each do |umr|
+    unless University.find_by(name: "#{umr["name"]}").nil?
+      University.find_by(name: "#{umr["name"]}").update!(
+        url: umr["url"],
+        facebook: umr["facebook"],
+        twitter: umr["twitter"],
+        phone: umr["tele"],
+        instagram: umr["instagram"],
+        linkedin: umr["linkedin"],
+        umultirank: "https://www.umultirank.org/study-at/#{umr["slug"]}")
+    end
+  end
